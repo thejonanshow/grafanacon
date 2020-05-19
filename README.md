@@ -49,6 +49,22 @@ export USER=pi
 k3sup join --ip $AGENT_IP --server-ip $SERVER_IP --user $USER
 ```
 
+## Install the dashboard:
+
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+https://www.replex.io/blog/how-to-install-access-and-add-heapster-metrics-to-the-kubernetes-dashboard
+https://www.edureka.co/blog/kubernetes-dashboard/
+
+```
+kubectl proxy
+kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+kubectl apply -f dashboard-crb.yml
+kubectl create serviceaccount dashboard-admin-sa
+kubectl create clusterrolebinding dashboard-admin-sa --clusterrole=cluster-admin --serviceaccount=default:dashboard-admin-sa
+kubectl get secrets
+kubectl describe secret dashboard-admin-sa-token-XXXXX
+```
+
 If you want to make this script better with a PR I'd really appreciate it.
 
 ## Fight COVID with your new drones! Thanks Balena!
